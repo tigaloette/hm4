@@ -1,17 +1,22 @@
-var freqA = 174;
-var freqS = 196;
-var freqD = 220;
-var freqF = 246;
+var freqA = 247;
+var freqS = 278;
+var freqD = 311;
+var freqF = 330;
 
 var oscA, oscS, oscD, oscF;
 var playingA, playingS, playingD, playingF = false;
 var playing = false;
 var value = 255;
 var box = 0;
+var ed = false;
+
+function preload () {
+  img = loadImage ('ed.png') 
+}
 
 function setup() {
   createCanvas(400,400);
-  backgroundColor = color(255, 0, 255);
+  backgroundColor = color(51, 204, 255);
   textAlign(CENTER);
   
   oscA = new p5.Oscillator();
@@ -41,16 +46,20 @@ function setup() {
 
 function draw() {
   if (playing) {
-    background(0, 255, 255);
+    background(51, 204, 255);
     fill(box+20,box-50,box+40);
-    noStroke();arc(width/2, height/2, 80, 80, 0, PI + box, PIE);
+    noStroke();arc(width/2, height/2, width, height, width, PI + box, PIE);
   } 
   
   else {
-    background(255, 0, 255);
+    background(255);
   }
   
-  text('click here,then press A/S/D/F keys to play', width / 2, 40);
+  text('shape of pacman - ed sherran', 260, height/2, 100);
+    
+  if (mouseIsPressed) {
+   image(img, mouseX, mouseY);
+ }
 }
 
 function keyPressed() {
@@ -95,11 +104,11 @@ function keyReleased() {
   }
 }
 
+function mousePressed() {
+ ed = true;
 
-function mouseClicked() {
-  if (value == 255) {
-    box = value;
-  } else {
-    box = box;
-  }
+}
+
+function mouseReleased() {
+ ed = false;
 }
